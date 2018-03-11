@@ -67,17 +67,37 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./main");
 /******/ })
 /************************************************************************/
 /******/ ({
-/***/ "main.js":
-/*!*****************!*  !*** main.js ***!
+/***/ "./main":
+/*!*****************!*  !*** ./main ***!
   *****************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("// const name = require('./name')\n// const greet = require('./greet')\n\nconsole.log('hello')\n// console.log(name)\n// greet(name)\n\n\n//# sourceURL=webpack:///main.js?");
+eval("const name = require('./name')\nconst greet = require('./greet')\n\n// console.log('hello')\nconsole.log(name)\ngreet(name)\n\n\n//# sourceURL=webpack:///./main?");
 
-/***/ }),
+/***/ })
+,
+/***/ "./name":
+/*!*****************!*  !*** ./name ***!
+  *****************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = 'Jason'\n\n\n//# sourceURL=webpack:///./name?");
+
+/***/ })
+,
+/***/ "./greet":
+/*!*****************!*  !*** ./greet ***!
+  *****************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = name => console.log('Hello, ' + name)\n\n\n//# sourceURL=webpack:///./greet?");
+
+/***/ })
 })

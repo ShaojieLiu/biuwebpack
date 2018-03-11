@@ -2,9 +2,10 @@
 const log = console.log.bind(console)
 const fs = require('fs')
 const babylon = require('babylon')
+const dist = './test/'
 
 const read = (path) => {
-    return fs.readFileSync('./test/' + path).toString()
+    return fs.readFileSync(dist + path.replace('./', '') + '.js').toString()
 }
 
 const write = (name, str) => {
@@ -25,35 +26,47 @@ const load = name => {
     return {name, code, ast}
 }
 
-const loadDeep = moduleName => {
-    const result = load(moduleName)
-    const {name, code, ast} = result
+const loadDeep = (moduleName, result={}) => {
+    const curr = load(moduleName)
+    const {name, code, ast} = curr
     showAst(ast)
+
+    result[name] = curr
+    ast.tokens.map((t, i) => {
+        if (t.type.label === 'name' &&
+            t.value === 'require') {
+            const childName = ast.tokens[i + 2].value
+            loadDeep(childName, result)
+        }
+    })
     return result
 }
 
 const main = () => {
-    const firstModule = 'main.js'
-    const {name, code, ast} = loadDeep(firstModule)
+    const firstModule = './main'
+    const infoArr = loadDeep(firstModule)
     // showAst(ast)
-    const templateArr = getTemplate(name, code)
-    const bundle = getModel(name, templateArr)
+    const templateArr = Object.values(infoArr).map(getTemplate)
+    const bundle = getModel(firstModule, templateArr)
     // log(bundle)
     write('bundle.js', bundle)
 }
 
-var getTemplate = (moduleName, code) => `
-/***/ "${moduleName}":
+var getTemplate = moduleInfo => {
+    const {name, code} = moduleInfo
+    return `
+/***/ "${name}":
 /*!*****************!*\
-  !*** ${moduleName} ***!
+  !*** ${name} ***!
   \*****************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("${code.replace(/\n/g, '\\n')}\\n\\n//# sourceURL=webpack:///${moduleName}?");
+eval("${code.replace(/\n/g, '\\n')}\\n\\n//# sourceURL=webpack:///${name}?");
 
-/***/ }),
+/***/ })
 `
+}
 
 var getModel = (firstModule, templateArr) => `
 /******/ (function(modules) { // webpackBootstrap
@@ -127,6 +140,6 @@ var getModel = (firstModule, templateArr) => `
 /******/ 	return __webpack_require__(__webpack_require__.s = "${firstModule}");
 /******/ })
 /************************************************************************/
-/******/ ({${templateArr}})`
+/******/ ({${templateArr.join(',')}})`
 
 main()

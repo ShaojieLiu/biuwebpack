@@ -76,9 +76,20 @@
   !*** ./main.js ***!
   \*****************/
 /*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("const name = __webpack_require__(/*! ./name */ \"./name.js\")\n// const greet = require('./greet')\n\n// console.log('hello')\nconsole.log(name)\n// greet(name)\n\n\n//# sourceURL=webpack:///./main.js?");
+
+/***/ }),
+
+/***/ "./name.js":
+/*!*****************!*\
+  !*** ./name.js ***!
+  \*****************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("// const name = require('./name')\n// const greet = require('./greet')\n\nconsole.log('hello')\n// console.log(name)\n// greet(name)\n\n\n//# sourceURL=webpack:///./main.js?");
+eval("module.exports = 'Jason'\n\n\n//# sourceURL=webpack:///./name.js?");
 
 /***/ })
 
