@@ -77,7 +77,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("const name = require('./name')\nconst greet = require('./greet')\n\n// console.log('hello')\nconsole.log(name)\ngreet(name)\n\n\n//# sourceURL=webpack:///./main?");
+eval("const name = require('./name')\n// const greet = require('./greet')\n\n// console.log('hello')\nconsole.log(name)\n// greet(name)\n\n\n//# sourceURL=webpack:///./main?");
 
 /***/ })
 ,
@@ -88,16 +88,6 @@ eval("const name = require('./name')\nconst greet = require('./greet')\n\n// con
 /***/ (function(module, exports) {
 
 eval("module.exports = 'Jason'\n\n\n//# sourceURL=webpack:///./name?");
-
-/***/ })
-,
-/***/ "./greet":
-/*!*****************!*  !*** ./greet ***!
-  *****************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("module.exports = name => console.log('Hello, ' + name)\n\n\n//# sourceURL=webpack:///./greet?");
 
 /***/ })
 })

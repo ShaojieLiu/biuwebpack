@@ -2,6 +2,7 @@
 const log = console.log.bind(console)
 const fs = require('fs')
 const babylon = require('babylon')
+const generate = require('@babel/generator')
 const dist = './test/'
 
 const read = (path) => {
@@ -28,17 +29,21 @@ const load = name => {
 
 const loadDeep = (moduleName, result={}) => {
     const curr = load(moduleName)
-    const {name, code, ast} = curr
+    let {name, code, ast} = curr
     showAst(ast)
 
-    result[name] = curr
     ast.tokens.map((t, i) => {
         if (t.type.label === 'name' &&
             t.value === 'require') {
+            ast.tokens[i].value = '__webpack_require__'
             const childName = ast.tokens[i + 2].value
             loadDeep(childName, result)
         }
     })
+    log(generate)
+    curr.code = generate(ast)
+    log(curr.code)
+    result[name] = curr
     return result
 }
 
