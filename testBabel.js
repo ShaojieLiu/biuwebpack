@@ -1,15 +1,42 @@
+// import * as babylon from "babylon";
+// import traverse from "@babel/traverse";
+//
+// const code = `function square(n) {
+//   return n * n;
+// }`;
+//
+// const ast = babylon.parse(code);
+//
+// traverse(ast, {
+//   enter(path) {
+//     if (
+//       path.node.type === "Identifier" &&
+//       path.node.name === "n"
+//     ) {
+//       path.node.name = "x";
+//     }
+//   }
+// });
+
 const parse = require('babylon').parse
-const generate = require('babel/generator')
+const generate = require('@babel/generator')
+const traverse  = require('@babel/traverse')
 
-const code = 'class Example {}';
-const ast = parse(code);
+const code = `function square(n) {
+  return n * n;
+}`
 
-const output = generate(ast, { /* options */ }, code);
+const ast = parse(code)
 
-// import {parse} from 'babylon';
-// import generate from 'babel-generator';
-//
-// const code = 'class Example {}';
-// const ast = parse(code);
-//
-// const output = generate(ast, { /* options */ }, code);
+console.log(generate, traverse)
+
+traverse(ast, {
+  enter(path) {
+    if (
+      path.node.type === "Identifier" &&
+      path.node.name === "n"
+    ) {
+      path.node.name = "x";
+    }
+  }
+});
