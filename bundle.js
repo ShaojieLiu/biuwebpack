@@ -71,23 +71,23 @@
 /******/ })
 /************************************************************************/
 /******/ ({
-/***/ "./main":
-/*!*****************!*  !*** ./main ***!
-  *****************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("const name = require('./name')\n// const greet = require('./greet')\n\n// console.log('hello')\nconsole.log(name)\n// greet(name)\n\n\n//# sourceURL=webpack:///./main?");
-
-/***/ })
-,
 /***/ "./name":
 /*!*****************!*  !*** ./name ***!
   *****************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 eval("module.exports = 'Jason'\n\n\n//# sourceURL=webpack:///./name?");
+
+/***/ })
+,
+/***/ "./main":
+/*!*****************!*  !*** ./main ***!
+  *****************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("const name = __webpack_require__('./name')\n// const greet = __webpack_require__('./greet')\n\n// console.log('hello')\nconsole.log(name)\n// greet(name)\n\n\n//# sourceURL=webpack:///./main?");
 
 /***/ })
 })

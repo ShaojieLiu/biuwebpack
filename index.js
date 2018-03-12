@@ -31,7 +31,6 @@ const loadDeep = (moduleName, result={}) => {
     const curr = load(moduleName)
     let {name, code, ast} = curr
     showAst(ast)
-
     ast.tokens.map((t, i) => {
         if (t.type.label === 'name' &&
             t.value === 'require') {
@@ -40,9 +39,11 @@ const loadDeep = (moduleName, result={}) => {
             loadDeep(childName, result)
         }
     })
-    log(generate)
-    curr.code = generate(ast)
-    log(curr.code)
+    curr.code = curr.code.replace(/require/g, '__webpack_require__')
+    
+    // log(generate)
+    // curr.code = generate(ast)
+    // log(curr.code)
     result[name] = curr
     return result
 }
@@ -65,7 +66,7 @@ var getTemplate = moduleInfo => {
   !*** ${name} ***!
   \*****************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 eval("${code.replace(/\n/g, '\\n')}\\n\\n//# sourceURL=webpack:///${name}?");
 

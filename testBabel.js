@@ -19,8 +19,8 @@
 // });
 
 const parse = require('babylon').parse
-const generate = require('@babel/generator')
-const traverse  = require('@babel/traverse')
+const generate = require('babel-generator')
+// const traverse = require('@babel/traverse')
 
 const code = `function square(n) {
   return n * n;
