@@ -41,9 +41,7 @@ const loadDeep = (moduleName, result={}) => {
     })
     curr.code = curr.code.replace(/require/g, '__webpack_require__')
     
-    // log(generate)
     // curr.code = generate(ast)
-    // log(curr.code)
     result[name] = curr
     return result
 }

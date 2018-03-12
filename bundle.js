@@ -81,13 +81,23 @@ eval("module.exports = 'Jason'\n\n\n//# sourceURL=webpack:///./name?");
 
 /***/ })
 ,
+/***/ "./greet":
+/*!*****************!*  !*** ./greet ***!
+  *****************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = name => console.log('Hello, ' + name)\n\n\n//# sourceURL=webpack:///./greet?");
+
+/***/ })
+,
 /***/ "./main":
 /*!*****************!*  !*** ./main ***!
   *****************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const name = __webpack_require__('./name')\n// const greet = __webpack_require__('./greet')\n\n// console.log('hello')\nconsole.log(name)\n// greet(name)\n\n\n//# sourceURL=webpack:///./main?");
+eval("const name = __webpack_require__('./name')\nconst greet = __webpack_require__('./greet')\n\n// console.log('hello')\nconsole.log(name)\ngreet(name)\n\n\n//# sourceURL=webpack:///./main?");
 
 /***/ })
 })
